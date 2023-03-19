@@ -7,7 +7,7 @@ from captcha.fields import CaptchaField
 from .models import *
 
 
-class AddSongForm(forms.ModelForm):
+class AddPostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['author'].empty_label = "Автор не выбран"
@@ -30,10 +30,6 @@ class AddSongForm(forms.ModelForm):
 
 
 class AddAuthorForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['author'].empty_label = "Автор не выбран"
-        self.fields['genre'].empty_label = "Жанр не выбран"
 
     class Meta:
         model = Author

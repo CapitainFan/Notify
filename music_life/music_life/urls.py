@@ -1,11 +1,14 @@
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
-import settings
+from music_life import settings
+from songs.views import *
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('captcha/', include('captcha.urls')),
     path('', include('songs.urls')),
 ]
 

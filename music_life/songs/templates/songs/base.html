@@ -4,9 +4,9 @@
 <html>
 <head>
 	<title>{{title}}</title>
-	<link type="text/css" href="{% static 'women/css/styles.css' %}" rel="stylesheet" />
+	<link type="text/css" href="{% static 'songs/css/styles.css' %}" rel="stylesheet" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="shortcut icon" href="{% static 'women/images/main.ico' %}" type="image/x-icon"/>
+	<link rel="shortcut icon" href="{% static 'songs/images/main.ico' %}" type="image/x-icon"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -36,18 +36,18 @@
 
 	<td valign="top" class="left-chapters">
 	<ul id="leftchapters">
-{% if cat_selected == 0 %}
-		<li class="selected">Все категории</li>
+{% if genre_selected == 0 %}
+		<li class="selected">Все жанры</li>
 {% else %}
-		<li><a href="{% url 'home' %}">Все категории</a></li>
+		<li><a href="{% url 'home' %}">Все жанры</a></li>
 {% endif %}
 
-{% for c in cats %}
-{% if c.women__count > 0 %}
-	{% if c.pk == cat_selected %}
-		<li class="selected">{{c.name}}</li>
+{% for g in genres %}
+{% if g.songs__count > 0 %}
+	{% if g.pk == genre_selected %}
+		<li class="selected">{{g.name}}</li>
 	{% else %}
-		<li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
+		<li><a href="{{ g.get_absolute_url }}">{{g.name}}</a></li>
 	{% endif %}
 {% endif %}
 {% endfor %}

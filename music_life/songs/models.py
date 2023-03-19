@@ -52,7 +52,7 @@ class Songs(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('song', kwargs={'song_slug': self.slug})
+        return reverse('songs', kwargs={'songs_slug': self.slug})
 
     class Meta:
         verbose_name = 'Песни'
@@ -126,7 +126,8 @@ class Album(models.Model):
     )
     author = models.ForeignKey(
         'Author',
-        verbose_name='Исполнитель'
+        verbose_name='Исполнитель',
+        on_delete=models.PROTECT,
     )
     photo = models.ImageField(
         upload_to="photos/%Y/%m/%d/",

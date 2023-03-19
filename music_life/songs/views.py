@@ -17,7 +17,7 @@ from .mixins import *
 class Home(DataMixin, ListView):
     model = Songs
     template_name = 'songs/index.html'
-    context_object_name = 'songs'
+    context_object_name = 'posts'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -28,9 +28,9 @@ class Home(DataMixin, ListView):
         return Songs.objects.filter(is_published=True)
 
 
-class AddSong(LoginRequiredMixin, DataMixin, CreateView):
-    form_class = AddSongForm
-    template_name = 'songs/addsong.html'
+class AddPage(LoginRequiredMixin, DataMixin, CreateView):
+    form_class = AddPostForm
+    template_name = 'songs/addpage.html'
     success_url = reverse_lazy('home')
     login_url = reverse_lazy('home')
     raise_exception = True
@@ -42,7 +42,7 @@ class AddSong(LoginRequiredMixin, DataMixin, CreateView):
 
 
 class AddAuthor(LoginRequiredMixin, DataMixin, CreateView):
-    form_class = AddSongForm
+    form_class = AddAuthorForm
     template_name = 'songs/addauthor.html'
     success_url = reverse_lazy('home')
     login_url = reverse_lazy('home')
@@ -54,15 +54,15 @@ class AddAuthor(LoginRequiredMixin, DataMixin, CreateView):
         return dict(list(context.items()) + list(g_def.items()))
 
 
-class ShowSong(DataMixin, DetailView):
+class ShowPost(DataMixin, DetailView):
     model = Songs
     template_name = 'songs/showsong.html'
-    slug_url_kwarg = 'song_slug'
-    context_object_name = 'song'
+    slug_url_kwarg = 'post_slug'
+    context_object_name = 'post'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title=context['song'])
+        g_def = self.get_user_context(title=context['post'])
         return dict(list(context.items()) + list(g_def.items()))
 
 
@@ -78,20 +78,20 @@ class ShowAuthor(DataMixin, DetailView):
         return dict(list(context.items()) + list(g_def.items()))
 
 
-class SongGener(DataMixin, ListView):
+class SongsGener(DataMixin, ListView):
     model = Songs
     template_name = 'songs/index.html'
-    context_object_name = 'gener'
+    context_object_name = 'posts'
     allow_empty = False
 
     def get_queryset(self):
-        return Songs.objects.filter(gener__slug=self.kwargs['gener_slug'], is_published=True)
+        return Songs.objects.filter(genre__slug=self.kwargs['genre_slug'], is_published=True)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g = Genre.objects.get(slug=self.kwargs['gener_slug'])
+        g = Genre.objects.get(slug=self.kwargs['genre_slug'])
         g_def = self.get_user_context(title='Жанр - ' + str(g.name),
-                                      gener_selected=g.pk)
+                                      genre_selected=g.pk)
         return dict(list(context.items()) + list(g_def.items()))
 
 

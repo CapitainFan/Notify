@@ -26,7 +26,7 @@ class AuthorAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     prepopulated_fields = {"slug": ("name",)}
     fields = ('name', 'slug', 'content', 'photo', 'get_html_photo')
-    readonly_fields = ('get_html_photo')
+    readonly_fields = ('get_html_photo',)
 
     def get_html_photo(self, object):
         if object.photo:
@@ -41,7 +41,7 @@ class AlbumAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     prepopulated_fields = {"slug": ("name",)}
     fields = ('name', 'slug', 'author', 'photo', 'get_html_photo')
-    readonly_fields = ('get_html_photo')
+    readonly_fields = ('get_html_photo',)
 
     def get_html_photo(self, object):
         if object.photo:
