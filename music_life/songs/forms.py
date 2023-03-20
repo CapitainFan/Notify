@@ -15,7 +15,7 @@ class AddPostForm(forms.ModelForm):
 
     class Meta:
         model = Songs
-        fields = ['title', 'slug', 'content', 'photo', 'author', 'genre', 'is_published',]
+        fields = ['title', 'slug', 'content', 'photo', 'author', 'genre', 'is_single','album', 'is_published',]
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-input'}),
             'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
