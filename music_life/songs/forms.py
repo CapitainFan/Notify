@@ -10,8 +10,9 @@ from .models import *
 class AddPostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['author'].empty_label = "Автор не выбран"
+        self.fields['author'].empty_label = "Исполнитель не выбран"
         self.fields['genre'].empty_label = "Жанр не выбран"
+        self.fields['album'].empty_label = "Альбом не выбран"
 
     class Meta:
         model = Songs
@@ -30,13 +31,25 @@ class AddPostForm(forms.ModelForm):
 
 
 class AddAuthorForm(forms.ModelForm):
-
     class Meta:
         model = Author
         fields = ['name', 'slug', 'content', 'photo']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-input'}),
             'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
+        }
+
+
+class AddAlbumForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['author'].empty_label = "Исполнитель не выбран"
+
+    class Meta:
+        model = Album
+        fields = ['name', 'slug', 'author', 'photo']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-input'}),
         }
 
 

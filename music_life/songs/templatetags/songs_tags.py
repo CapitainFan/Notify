@@ -11,10 +11,10 @@ def get_categories(filter=None):
         return Genre.objects.filter(pk=filter)
 
 @register.inclusion_tag('songs/list_genres.html')
-def show_categories(sort=None, cat_selected=0):
+def show_categories(sort=None, genre_selected=0):
     if not sort:
-        cats = Genre.objects.all()
+        genres = Genre.objects.all()
     else:
-        cats = Genre.objects.order_by(sort)
+        genres = Genre.objects.order_by(sort)
 
-    return {"cats": cats, "cat_selected": cat_selected}
+    return {"genres": genres, "genre_selected": genre_selected}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.core.exceptions import ValidationError
 
 class Songs(models.Model):
     title = models.CharField(
@@ -48,15 +49,23 @@ class Songs(models.Model):
     )
     album = models.ForeignKey(
         'Album',
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         verbose_name='Альбом',
+        null=True,
+        blank=True,
     )
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('songs', kwargs={'songs_slug': self.slug})
+        return reverse('post', kwargs={'post_slug': self.slug})
+
+    def clean_email(self):
+        if self.is_single and self.album is not None:
+            raise ValidationError("Песня не может быть одновременно синглом и входить в альбом")
+        if not self.is_single and self.album is None:
+            raise ValidationError("Песня не может быть не синглом и не входить в альбом")
 
     class Meta:
         verbose_name = 'Песня'

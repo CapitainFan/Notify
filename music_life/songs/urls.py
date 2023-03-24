@@ -8,6 +8,7 @@ urlpatterns = [
     path('login/', LoginUser.as_view(), name='login'),
     path('about/', AboutView.as_view(), name='about'),
     path('addpage/', AddPage.as_view(), name='add_page'),
+    path('addalbum/', AddAlbum.as_view(), name='add_album'),
     path('addauthor/', AddAuthor.as_view(), name='add_author'),
     path('register/', RegisterUser.as_view(), name='register'),
     path('contact/', ContactFormView.as_view(), name='contact'),

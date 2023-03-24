@@ -50,7 +50,20 @@ class AddAuthor(LoginRequiredMixin, DataMixin, CreateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title="Добавление автора")
+        g_def = self.get_user_context(title="Добавление исполнителя")
+        return dict(list(context.items()) + list(g_def.items()))
+
+
+class AddAlbum(LoginRequiredMixin, DataMixin, CreateView):
+    form_class = AddAlbumForm
+    template_name = 'songs/addalbum.html'
+    success_url = reverse_lazy('home')
+    login_url = reverse_lazy('home')
+    raise_exception = True
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        g_def = self.get_user_context(title="Добавление альбома")
         return dict(list(context.items()) + list(g_def.items()))
 
 

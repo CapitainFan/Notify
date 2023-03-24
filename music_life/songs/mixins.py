@@ -1,10 +1,11 @@
 from .models import *
 
 menu = [
+    {'title': "Добавить автора", 'url_name': 'add_author'},
+    {'title': "Добавить альбом", 'url_name': 'add_album'},
     {'title': "Добавить статью", 'url_name': 'add_page'},
-    {'title': "Добавить исполнителя", 'url_name': 'add_author'},
-    {'title': "О сайте", 'url_name': 'about'},
     {'title': "Обратная связь", 'url_name': 'contact'},
+    {'title': "О сайте", 'url_name': 'about'},
 ]
 
 class DataMixin:
@@ -16,8 +17,9 @@ class DataMixin:
         user_menu = menu.copy()
 
         if not self.request.user.is_authenticated:
-            user_menu.pop(1)
-            user_menu.pop(1)
+            for i in range(3):
+                user_menu.pop(0)
+
 
         context['menu'] = user_menu
         context['genres'] = genres
