@@ -20,7 +20,6 @@ class DataMixin:
             for i in range(3):
                 user_menu.pop(0)
 
-
         context['menu'] = user_menu
         context['genres'] = genres
 

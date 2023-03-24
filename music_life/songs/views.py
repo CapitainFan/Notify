@@ -107,7 +107,7 @@ class SongsGener(DataMixin, ListView):
     model = Songs
     template_name = 'songs/index.html'
     context_object_name = 'posts'
-    allow_empty = False
+#    allow_empty = False
 
     def get_queryset(self):
         return Songs.objects.filter(genre__slug=self.kwargs['genre_slug'], is_published=True)
