@@ -67,6 +67,18 @@ class AddAlbum(LoginRequiredMixin, DataMixin, CreateView):
         return dict(list(context.items()) + list(g_def.items()))
 
 
+class ShowAlbum(DataMixin, DetailView):
+    model = Album
+    template_name = 'songs/showalbum.html'
+    slug_url_kwarg = 'album_slug'
+    context_object_name = 'album'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        g_def = self.get_user_context(title=context['album'])
+        return dict(list(context.items()) + list(g_def.items()))
+
+
 class ShowPost(DataMixin, DetailView):
     model = Songs
     template_name = 'songs/showsong.html'

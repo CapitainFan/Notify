@@ -1,7 +1,11 @@
 {% extends 'songs/base.html' %}
 
 {% block content %}
-<h1>{{post.title}}</h1>
+<h1>{{post.title}}</h1>  <h3>Дата : {{post.time_create}}</h3>
+
+<h2>Жанр : {{post.genre}}</h2>
+
+<h3>Исполнитель : {{post.author}}</h3>
 
 {% if post.photo %}
 <p><img class="img-article-left" src="{{post.photo.url}}"></p>

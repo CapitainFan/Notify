@@ -1,0 +1,12 @@
+{% extends 'songs/base.html' %}
+
+{% block content %}
+<h1>{{album.name}}</h1>
+
+<h3>Исполнитель : {{album.author}}</h3>
+
+{% if album.photo %}
+<p><img class="img-article-left" src="{{album.photo.url}}"></p>
+{% endif %}
+
+{% endblock %}
