@@ -36,9 +36,9 @@
 	<td valign="top" class="left-chapters">
 	<ul id="leftchapters">
 {% if genre_selected == 0 %}
-		<li class="selected">Все жанры</li>
+		<li class="selected">Все жанры песен</li>
 {% else %}
-		<li><a href="{% url 'home' %}">Все жанры</a></li>
+		<li><a href="{% url 'home' %}">Все жанры песен</a></li>
 {% endif %}
 
 {% for g in genres %}
@@ -54,6 +54,7 @@
 	</ul>
 </td>
 <!-- Конец Sidebar'а -->
+
 <td valign="top" class="content">
 	<!-- Хлебные крошки -->
 	{% block breadcrumbs %}

@@ -97,10 +97,20 @@ class ShowAuthor(DataMixin, DetailView):
     slug_url_kwarg = 'author_slug'
     context_object_name = 'author'
 
+    def get_queryset(self):
+        return Author.objects.filter(slug=self.kwargs['author_slug'])
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title=context['author'])
+        g = Author.objects.get(slug=self.kwargs['author_slug'])
+        g_def = self.get_user_context(title='Автор - ' + str(g.name),
+                                      author_selected=g.pk)
         return dict(list(context.items()) + list(g_def.items()))
+
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     g_def = self.get_user_context(title=context['author'])
+    #     return dict(list(context.items()) + list(g_def.items()))
 
 
 class SongsGener(DataMixin, ListView):

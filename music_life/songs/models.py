@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 class Songs(models.Model):
     title = models.CharField(
         max_length=255,
-        verbose_name='Заголовок',
+        verbose_name='Название песни',
     )
     slug = models.SlugField(
         max_length=255,
@@ -15,7 +15,7 @@ class Songs(models.Model):
     )
     content = models.TextField(
         blank=True,
-        verbose_name='Текст статьи',
+        verbose_name='Информация',
     )
     photo = models.ImageField(
         upload_to='photos/%Y/%m/%d/',
@@ -78,7 +78,7 @@ class Genre(models.Model):
     name = models.CharField(
         max_length=100,
         db_index=True,
-        verbose_name='Жанр',
+        verbose_name='Навание жанра',
     )
     slug = models.SlugField(
         max_length=255,
@@ -103,7 +103,7 @@ class Author(models.Model):
     name = models.CharField(
         max_length=100,
         db_index=True,
-        verbose_name='Автор',
+        verbose_name='Имя исполнителя',
     )
     content = models.TextField(
         blank=True,
@@ -136,7 +136,7 @@ class Album(models.Model):
     name = models.CharField(
         max_length=100,
         db_index=True,
-        verbose_name='Альбом',
+        verbose_name='Название альбома',
     )
     author = models.ForeignKey(
         'Author',
