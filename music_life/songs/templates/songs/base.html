@@ -35,18 +35,29 @@
 
 	<td valign="top" class="left-chapters">
 	<ul id="leftchapters">
-{% if genre_selected == 0 %}
-		<li class="selected">Все жанры песен</li>
+
+{% if is_authorslist == 0 %}
+	<li><a href="{% url 'authorslist' %}">Исполнители</a></li>
 {% else %}
+	<li class="selected">Исполнители</li>
+{% endif %}
+
+{% if genre_selected == 0 %}
+	{% if is_authorslist == 0 %}
+		<li class="selected">Все жанры песен</li>
+	{% else %}
 		<li><a href="{% url 'home' %}">Все жанры песен</a></li>
+	{% endif %}
+{% else %}
+	<li><a href="{% url 'home' %}">Все жанры песен</a></li>
 {% endif %}
 
 {% for g in genres %}
 {% if g.get_songs.count > 0 %}
 	{% if g.pk == genre_selected %}
-		<li class="selected">{{g.name}}</li>
+		<li class="selected">· {{g.name}}</li>
 	{% else %}
-		<li><a href="{{ g.get_absolute_url }}">{{g.name}}</a></li>
+		<li><a href="{{ g.get_absolute_url }}">· {{g.name}}</a></li>
 	{% endif %}
 {% endif %}
 {% endfor %}

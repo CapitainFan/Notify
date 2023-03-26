@@ -28,12 +28,15 @@ class DataMixin:
         context['authors'] = authors
 
         if 'genre_selected' not in context:
-            context['genre_selected'] = 0
+            context['genre_selected'] = -1
 
         if 'album_selected' not in context:
             context['album_selected'] = 0
 
         if 'author_selected' not in context:
             context['author_selected'] = 0
+
+        if 'is_authorslist' not in context:
+            context['is_authorslist'] = 0
 
         return context
