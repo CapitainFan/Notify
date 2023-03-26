@@ -42,11 +42,13 @@
 {% endif %}
 
 {% for g in genres %}
+{% if g.get_songs.count > 0 %}
 	{% if g.pk == genre_selected %}
 		<li class="selected">{{g.name}}</li>
 	{% else %}
 		<li><a href="{{ g.get_absolute_url }}">{{g.name}}</a></li>
 	{% endif %}
+{% endif %}
 {% endfor %}
 
 	</ul>
