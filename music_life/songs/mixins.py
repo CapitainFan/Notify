@@ -15,7 +15,7 @@ class DataMixin:
         context = kwargs
         genres = Genre.objects.all()
         albums = Album.objects.all()
-        authors = Author.objects.all()
+        authors = Author.objects.all().order_by('name')
         user_menu = menu.copy()
 
         if not self.request.user.is_authenticated:
