@@ -1,9 +1,6 @@
 from django.contrib.auth import logout, login
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.core.paginator import Paginator
-from django.http import HttpResponse, HttpResponseNotFound, Http404
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.views.generic.edit import FormView
@@ -107,17 +104,12 @@ class ShowAuthor(DataMixin, DetailView):
                                       author_selected=g.pk)
         return dict(list(context.items()) + list(g_def.items()))
 
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     g_def = self.get_user_context(title=context['author'])
-    #     return dict(list(context.items()) + list(g_def.items()))
-
 
 class SongsGener(DataMixin, ListView):
     model = Songs
     template_name = 'songs/index.html'
     context_object_name = 'posts'
-#    allow_empty = False
+    allow_empty = False
 
     def get_queryset(self):
         return Songs.objects.filter(genre__slug=self.kwargs['genre_slug'], is_published=True)
@@ -137,8 +129,11 @@ class AuthorsList(DataMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        authors = Author.objects.all().order_by('name')
+        context['authors'] = authors
         g_def = self.get_user_context(title='Исполнители', is_authorslist=1)
-        return dict(list(context.items()) + list(g_def.items()))
+        context = dict(list(context.items()) + list(g_def.items()))
+        return context
 
 
 class RegisterUser(DataMixin, CreateView):

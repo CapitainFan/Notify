@@ -14,8 +14,6 @@ class DataMixin:
     def get_user_context(self, **kwargs):
         context = kwargs
         genres = Genre.objects.all()
-        albums = Album.objects.all()
-        authors = Author.objects.all().order_by('name')
         user_menu = menu.copy()
 
         if not self.request.user.is_authenticated:
@@ -24,17 +22,9 @@ class DataMixin:
 
         context['menu'] = user_menu
         context['genres'] = genres
-        context['albums'] = albums
-        context['authors'] = authors
 
         if 'genre_selected' not in context:
             context['genre_selected'] = -1
-
-        if 'album_selected' not in context:
-            context['album_selected'] = 0
-
-        if 'author_selected' not in context:
-            context['author_selected'] = 0
 
         if 'is_authorslist' not in context:
             context['is_authorslist'] = 0
