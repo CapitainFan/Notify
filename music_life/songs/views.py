@@ -136,6 +136,20 @@ class AuthorsList(DataMixin, ListView):
         return Author.objects.all().order_by('name')
 
 
+class AlbumsList(DataMixin, ListView):
+    model = Album
+    template_name = 'songs/albums.html'
+    context_object_name = 'albums'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        g_def = self.get_user_context(title="Альбомы", album_selected=0)
+        return dict(list(context.items()) + list(g_def.items()))
+
+    def get_queryset(self):
+        return Album.objects.all().order_by('name')
+
+
 class RegisterUser(DataMixin, CreateView):
     form_class = RegisterUserForm
     template_name = 'songs/register.html'

@@ -51,6 +51,12 @@
 	<li><a href="{% url 'authors' %}">Исполнители</a></li>
 {% endif %}
 
+{% if album_selected == 0 %}
+	<li class="selected">Альбомы</li>
+{% else %}
+	<li><a href="{% url 'albums' %}">Альбомы</a></li>
+{% endif %}
+
 {% if genre_selected == 0 %}
 	<li class="selected">Все жанры песен</li>
 {% else %}

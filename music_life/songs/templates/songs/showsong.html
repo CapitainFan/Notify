@@ -3,16 +3,16 @@
 {% block content %}
 <h1>{{ post.title }}</h1>  
 
-<h3> {{ post.time_create|date:"F j, Y" }} </h3>
+<h3>{{ post.time_create|date:"F j, Y" }}</h3>
 
-<h2> Исполнитель : {{post.author}} </h2>
+<h2>Жанр : {{post.genre}}</h2>
 
-<h2> Жанр : {{post.genre}} </h2>
+<h2><p class="link">Исполнитель : <a href="{{ post.author.get_absolute_url }}">{{post.author.name}}</a></p></h2>
 
 {% if post.is_single %}
-    <h2> Cингл </h2>
+    <h2>Cингл</h2>
 {% else %}
-    <h2> Альбом : {{post.album}} </h2>
+    <h2><p class="link">Альбом : <a href="{{ post.album.get_absolute_url }}">{{post.album.name}}</a></p></h2>
 {% endif %}
 
 {% if post.photo %}

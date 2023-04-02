@@ -3,7 +3,7 @@
 {% block content %}
 <h1>{{album.name}}</h1>
 
-<h3>Исполнитель : {{album.author}}</h3>
+<h2><p class="link">Исполнитель : <a href="{{ album.author.get_absolute_url }}">{{album.author.name}}</a></p></h2>
 
 {% if album.photo %}
 <p><img class="img-article-left" src="{{album.photo.url}}"></p>
