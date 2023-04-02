@@ -13,7 +13,7 @@ class DataMixin:
 
     def get_user_context(self, **kwargs):
         context = kwargs
-        genres = Genre.objects.all()
+        genres = Genre.objects.all().order_by('name')
         user_menu = menu.copy()
 
         if not self.request.user.is_authenticated:
