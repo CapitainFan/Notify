@@ -124,12 +124,12 @@ class SongsGener(DataMixin, ListView):
 
 class AuthorsList(DataMixin, ListView):
     model = Author
-    template_name = 'songs/songs.html'
+    template_name = 'songs/authors.html'
     context_object_name = 'songs'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title="Songs")
+        g_def = self.get_user_context(title="Исполнители")
         return dict(list(context.items()) + list(g_def.items()))
 
     def get_queryset(self):
