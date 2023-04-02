@@ -14,7 +14,7 @@ class Songs(models.Model):
         verbose_name='URL',
     )
     content = models.TextField(
-        blank=True,
+        max_length=50000,
         verbose_name='Информация',
     )
     photo = models.ImageField(
