@@ -47,6 +47,7 @@ class Songs(models.Model):
         'Author',
         on_delete=models.PROTECT,
         verbose_name='Исполнитель',
+        related_name='get_songs',
     )
     album = models.ForeignKey(
         'Album',

@@ -8,4 +8,21 @@
 {% endif %}
 
 {{author.content|linebreaks}}
+
+<div class="clear"></div>
+
+{% if author.get_songs.count > 0 %}
+	<h2>Список песен:</h2>
+{% endif %}
+
+{% for song in author.get_songs.all %}
+	<h3>{{song.title}}</h3>
+	
+	{% if song.photo %}
+		<p><img class="img-article-left thumb" src="{{song.photo.url}}"></p>
+	{% endif %}
+
+	<h3><p class="link"><a href="{{ song.get_absolute_url }}">Читать пост</a></p></h3>
+{% endfor %}
+
 {% endblock %}
