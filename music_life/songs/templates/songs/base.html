@@ -45,11 +45,7 @@
 	<td valign="top" class="left-chapters">
 	<ul id="leftchapters">
 
-{% if is_authorslist == 0 %}
-	<li><a href="{% url 'authorslist' %}">Исполнители</a></li>
-{% else %}
-	<li class="selected">Исполнители</li>
-{% endif %}
+<li><a href="{% url 'songs' %}">Исполнители</a></li>
 
 {% if genre_selected == 0 %}
 	{% if is_authorslist == 0 %}
