@@ -3,10 +3,27 @@
 {% block content %}
 <h1>{{album.name}}</h1>
 
-<h2><p class="link">Исполнитель : <a href="{{ album.author.get_absolute_url }}">{{album.author.name}}</a></p></h2>
+<h2><p class="link">Исполнитель :<a href="{{ album.author.get_absolute_url }}">{{album.author.name}}</a></p></h2>
 
 {% if album.photo %}
 <p><img class="img-article-left" src="{{album.photo.url}}"></p>
 {% endif %}
+
+<div class="clear"></div>
+
+{% if album.get_songs.count > 0 %}
+	<h2>Песни из этого альбома :</h2>
+{% endif %}
+
+{% for song in album.get_songs.all %}
+	<h2><p class="link"><a href="{{ song.get_absolute_url }}">{{song.title}}</a></p></h2>
+	
+	{% if song.photo %}
+		<p><img class="img-article-left thumb" src="{{song.photo.url}}"></p>
+	{% endif %}
+
+	<div class="clear"></div>
+{% endfor %}
+
 
 {% endblock %}

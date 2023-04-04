@@ -16,13 +16,28 @@
 {% endif %}
 
 {% for song in author.get_songs.all %}
-	<h3>{{song.title}}</h3>
-	
+	<h2><p class="link"><a href="{{ song.get_absolute_url }}">{{song.title}}</a></p></h2>
+
 	{% if song.photo %}
 		<p><img class="img-article-left thumb" src="{{song.photo.url}}"></p>
 	{% endif %}
 
-	<h3><p class="link"><a href="{{ song.get_absolute_url }}">Читать пост</a></p></h3>
+	<div class="clear"></div>
 {% endfor %}
 
+<div class="clear"></div>
+
+{% if author.get_album.count > 0 %}
+	<h2>Список альбомов:</h2>
+{% endif %}
+
+{% for album in author.get_album.all %}
+	<h2><p class="link"><a href="{{ album.get_absolute_url }}">{{album.name}}</a></p></h2>
+	
+	{% if album.photo %}
+		<p><img class="img-article-left thumb" src="{{album.photo.url}}"></p>
+	{% endif %}
+
+	<div class="clear"></div>
+{% endfor %}
 {% endblock %}

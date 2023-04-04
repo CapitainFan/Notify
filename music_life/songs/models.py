@@ -53,6 +53,7 @@ class Songs(models.Model):
         'Album',
         on_delete=models.CASCADE,
         verbose_name='Альбом',
+        related_name='get_songs',
         null=True,
         blank=True,
     )
@@ -142,6 +143,7 @@ class Album(models.Model):
     author = models.ForeignKey(
         'Author',
         verbose_name='Исполнитель',
+        related_name='get_album',
         on_delete=models.PROTECT,
     )
     photo = models.ImageField(
