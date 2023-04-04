@@ -22,7 +22,7 @@ class Home(DataMixin, ListView):
         return dict(list(context.items()) + list(g_def.items()))
 
     def get_queryset(self):
-        return Songs.objects.filter(is_published=True).order_by('title')
+        return Songs.objects.filter(is_published=True)
 
 
 class AddPage(LoginRequiredMixin, DataMixin, CreateView):
@@ -112,7 +112,7 @@ class SongsGener(DataMixin, ListView):
     allow_empty = False
 
     def get_queryset(self):
-        return Songs.objects.filter(genre__slug=self.kwargs['genre_slug'], is_published=True).order_by('title')
+        return Songs.objects.filter(genre__slug=self.kwargs['genre_slug'], is_published=True)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -133,7 +133,7 @@ class AuthorsList(DataMixin, ListView):
         return dict(list(context.items()) + list(g_def.items()))
 
     def get_queryset(self):
-        return Author.objects.all().order_by('name')
+        return Author.objects.all()
 
 
 class AlbumsList(DataMixin, ListView):
@@ -147,7 +147,7 @@ class AlbumsList(DataMixin, ListView):
         return dict(list(context.items()) + list(g_def.items()))
 
     def get_queryset(self):
-        return Album.objects.all().order_by('name')
+        return Album.objects.all()
 
 
 class RegisterUser(DataMixin, CreateView):

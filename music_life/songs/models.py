@@ -2,6 +2,103 @@ from django.db import models
 from django.urls import reverse
 from django.core.exceptions import ValidationError
 
+
+class Author(models.Model):
+    name = models.CharField(
+        max_length=100,
+        db_index=True,
+        verbose_name='Имя исполнителя',
+        unique=True,
+    )
+    content = models.TextField(
+        max_length=50000,
+        blank=True,
+        verbose_name='Про исполнителя',
+    )
+    photo = models.ImageField(
+        upload_to='photos/%Y/%m/%d/',
+        verbose_name='Фото',
+    )
+    slug = models.SlugField(
+        max_length=255,
+        unique=True,
+        db_index=True,
+        verbose_name='URL',
+    )
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('author', kwargs={'author_slug': self.slug})
+
+    class Meta:
+        verbose_name = 'Исполнитель'
+        verbose_name_plural = 'Исполнители'
+        ordering = ['name']
+
+
+class Album(models.Model):
+    name = models.CharField(
+        max_length=100,
+        db_index=True,
+        verbose_name='Название альбома',
+    )
+    author = models.ForeignKey(
+        Author,
+        verbose_name='Исполнитель',
+        related_name='get_album',
+        on_delete=models.PROTECT,
+    )
+    photo = models.ImageField(
+        upload_to='photos/%Y/%m/%d/',
+        verbose_name='Фото',
+    )
+    slug = models.SlugField(
+        max_length=255,
+        unique=True,
+        db_index=True,
+        verbose_name='URL',
+    )
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('album', kwargs={'album_slug': self.slug})
+
+    class Meta:
+        verbose_name = 'Альбом'
+        verbose_name_plural = 'Альбомы'
+        ordering = ['name']
+
+
+class Genre(models.Model):
+    name = models.CharField(
+        max_length=100,
+        db_index=True,
+        verbose_name='Навание жанра',
+        unique=True,
+    )
+    slug = models.SlugField(
+        max_length=255,
+        unique=True,
+        db_index=True,
+        verbose_name='URL',
+    )
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('genre', kwargs={'genre_slug': self.slug})
+
+    class Meta:
+        verbose_name = 'Жанр'
+        verbose_name_plural = 'Жанры'
+        ordering = ['name']
+
+
 class Songs(models.Model):
     title = models.CharField(
         max_length=255,
@@ -37,20 +134,18 @@ class Songs(models.Model):
         default=True,
         verbose_name='Сингл',
     )
-    genre = models.ForeignKey(
-        'Genre', 
-        on_delete=models.PROTECT,
-        verbose_name='Жанр',
+    genre = models.ManyToManyField(
+        Genre,
+        verbose_name='Жанры',
         related_name='get_songs',
     )
-    author = models.ForeignKey(
-        'Author',
-        on_delete=models.PROTECT,
-        verbose_name='Исполнитель',
+    author = models.ManyToManyField(
+        Author,
+        verbose_name='Исполнители',
         related_name='get_songs',
     )
     album = models.ForeignKey(
-        'Album',
+        Album,
         on_delete=models.CASCADE,
         verbose_name='Альбом',
         related_name='get_songs',
@@ -73,97 +168,4 @@ class Songs(models.Model):
     class Meta:
         verbose_name = 'Песня'
         verbose_name_plural = 'Песни'
-        ordering = ['id']
-
-
-class Genre(models.Model):
-    name = models.CharField(
-        max_length=100,
-        db_index=True,
-        verbose_name='Навание жанра',
-    )
-    slug = models.SlugField(
-        max_length=255,
-        unique=True,
-        db_index=True,
-        verbose_name='URL',
-    )
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('genre', kwargs={'genre_slug': self.slug})
-
-    class Meta:
-        verbose_name = 'Жанр'
-        verbose_name_plural = 'Жанры'
-        ordering = ['id']
-
-
-class Author(models.Model):
-    name = models.CharField(
-        max_length=100,
-        db_index=True,
-        verbose_name='Имя исполнителя',
-    )
-    content = models.TextField(
-        blank=True,
-        verbose_name='Про исполнителя',
-    )
-    photo = models.ImageField(
-        upload_to='photos/%Y/%m/%d/',
-        verbose_name='Фото',
-    )
-    slug = models.SlugField(
-        max_length=255,
-        unique=True,
-        db_index=True,
-        verbose_name='URL',
-    )
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('author', kwargs={'author_slug': self.slug})
-
-    class Meta:
-        verbose_name = 'Исполнитель'
-        verbose_name_plural = 'Исполнители'
-        ordering = ['name']
-
-
-class Album(models.Model):
-    name = models.CharField(
-        max_length=100,
-        db_index=True,
-        verbose_name='Название альбома',
-    )
-    author = models.ForeignKey(
-        'Author',
-        verbose_name='Исполнитель',
-        related_name='get_album',
-        on_delete=models.PROTECT,
-    )
-    photo = models.ImageField(
-        upload_to='photos/%Y/%m/%d/',
-        verbose_name='Фото',
-    )
-    slug = models.SlugField(
-        max_length=255,
-        unique=True,
-        db_index=True,
-        verbose_name='URL',
-    )
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('album', kwargs={'album_slug': self.slug})
-
-    class Meta:
-        verbose_name = 'Альбом'
-        verbose_name_plural = 'Альбомы'
-        ordering = ['id']
+        ordering = ['title']

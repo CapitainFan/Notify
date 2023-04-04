@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 from .models import *
 
 class SongsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'time_create', 'get_html_photo', 'author', 'album', 'genre', 'is_published')
+    list_display = ('id', 'title', 'time_create', 'get_html_photo', 'album', 'is_published')
     list_display_links = ('id', 'title')
     search_fields = ('title', 'content')
     list_editable = ('is_published',)
