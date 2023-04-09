@@ -11,14 +11,14 @@ from .models import *
 from .mixins import *
 
 
-class Home(DataMixin, ListView):
+class Home(LoginRequiredMixin, DataMixin, ListView):
     model = Songs
     template_name = 'songs/index.html'
     context_object_name = 'posts'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title="Главная страница", genre_selected=0)
+        g_def = self.get_user_context(title='Notify', genre_selected=0)
         return dict(list(context.items()) + list(g_def.items()))
 
     def get_queryset(self):
@@ -34,7 +34,7 @@ class AddPage(LoginRequiredMixin, DataMixin, CreateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title="Добавление статьи")
+        g_def = self.get_user_context(title='Post adding')
         return dict(list(context.items()) + list(g_def.items()))
 
 
@@ -47,7 +47,7 @@ class AddAuthor(LoginRequiredMixin, DataMixin, CreateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title="Добавление исполнителя")
+        g_def = self.get_user_context(title='Performer adding')
         return dict(list(context.items()) + list(g_def.items()))
 
 
@@ -60,11 +60,11 @@ class AddAlbum(LoginRequiredMixin, DataMixin, CreateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title="Добавление альбома")
+        g_def = self.get_user_context(title='Album adding')
         return dict(list(context.items()) + list(g_def.items()))
 
 
-class ShowAlbum(DataMixin, DetailView):
+class ShowAlbum(LoginRequiredMixin, DataMixin, DetailView):
     model = Album
     template_name = 'songs/showalbum.html'
     slug_url_kwarg = 'album_slug'
@@ -76,7 +76,7 @@ class ShowAlbum(DataMixin, DetailView):
         return dict(list(context.items()) + list(g_def.items()))
 
 
-class ShowPost(DataMixin, DetailView):
+class ShowPost(LoginRequiredMixin, DataMixin, DetailView):
     model = Songs
     template_name = 'songs/showsong.html'
     slug_url_kwarg = 'post_slug'
@@ -88,7 +88,7 @@ class ShowPost(DataMixin, DetailView):
         return dict(list(context.items()) + list(g_def.items()))
 
 
-class ShowAuthor(DataMixin, DetailView):
+class ShowAuthor(LoginRequiredMixin, DataMixin, DetailView):
     model = Author
     template_name = 'songs/showauthor.html'
     slug_url_kwarg = 'author_slug'
@@ -100,12 +100,12 @@ class ShowAuthor(DataMixin, DetailView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         g = Author.objects.get(slug=self.kwargs['author_slug'])
-        g_def = self.get_user_context(title='Автор - ' + str(g.name),
+        g_def = self.get_user_context(title='Performer - ' + str(g.name),
                                       author_selected=g.pk)
         return dict(list(context.items()) + list(g_def.items()))
 
 
-class SongsGener(DataMixin, ListView):
+class SongsGener(LoginRequiredMixin, DataMixin, ListView):
     model = Songs
     template_name = 'songs/index.html'
     context_object_name = 'posts'
@@ -117,33 +117,33 @@ class SongsGener(DataMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         g = Genre.objects.get(slug=self.kwargs['genre_slug'])
-        g_def = self.get_user_context(title='Жанр - ' + str(g.name),
+        g_def = self.get_user_context(title='Genre - ' + str(g.name),
                                       genre_selected=g.pk)
         return dict(list(context.items()) + list(g_def.items()))
 
 
-class AuthorsList(DataMixin, ListView):
+class AuthorsList(LoginRequiredMixin, DataMixin, ListView):
     model = Author
     template_name = 'songs/authors.html'
     context_object_name = 'authors'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title="Исполнители", author_selected=0)
+        g_def = self.get_user_context(title='Performers', author_selected=0)
         return dict(list(context.items()) + list(g_def.items()))
 
     def get_queryset(self):
         return Author.objects.all()
 
 
-class AlbumsList(DataMixin, ListView):
+class AlbumsList(LoginRequiredMixin, DataMixin, ListView):
     model = Album
     template_name = 'songs/albums.html'
     context_object_name = 'albums'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title="Альбомы", album_selected=0)
+        g_def = self.get_user_context(title='Albums', album_selected=0)
         return dict(list(context.items()) + list(g_def.items()))
 
     def get_queryset(self):
@@ -157,7 +157,7 @@ class RegisterUser(DataMixin, CreateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title="Регистрация")
+        g_def = self.get_user_context(title='Sign up')
         return dict(list(context.items()) + list(g_def.items()))
 
     def form_valid(self, form):
@@ -172,21 +172,21 @@ class LoginUser(DataMixin, LoginView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title="Авторизация")
+        g_def = self.get_user_context(title='Sign in')
         return dict(list(context.items()) + list(g_def.items()))
 
     def get_success_url(self):
         return reverse_lazy('home')
 
 
-class ContactFormView(DataMixin, FormView):
+class ContactFormView(LoginRequiredMixin, DataMixin, FormView):
     form_class = ContactForm
-    template_name = 'songs/contact.html'
+    template_name = None
     success_url = reverse_lazy('home')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title="Обратная связь")
+        g_def = self.get_user_context(title='Contact')
         return dict(list(context.items()) + list(g_def.items()))
 
     def form_valid(self, form):
@@ -194,19 +194,19 @@ class ContactFormView(DataMixin, FormView):
         return redirect('home')
 
 
-class AboutView(DataMixin, TemplateView):
+class AboutView(LoginRequiredMixin, DataMixin, TemplateView):
     template_name = 'songs/about.html'
     success_url = reverse_lazy('home')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title="О сайте")
+        g_def = self.get_user_context(title='About')
         return dict(list(context.items()) + list(g_def.items()))
 
 
 def logout_user(request):
     logout(request)
-    return redirect('home')
+    return redirect('login')
 
 
 def pageNotFound(request, exception):

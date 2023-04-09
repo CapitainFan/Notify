@@ -13,7 +13,6 @@ urlpatterns = [
     path('addalbum/', AddAlbum.as_view(), name='add_album'),
     path('addauthor/', AddAuthor.as_view(), name='add_author'),
     path('register/', RegisterUser.as_view(), name='register'),
-    path('contact/', ContactFormView.as_view(), name='contact'),
     path('album/<slug:album_slug>/', ShowAlbum.as_view(), name='album'),
     path('post/<slug:post_slug>/', ShowPost.as_view(), name='post'),
     path('author/<slug:author_slug>/', ShowAuthor.as_view(), name='author'),

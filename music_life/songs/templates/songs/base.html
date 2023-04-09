@@ -2,13 +2,12 @@
 <!DOCTYPE html>
 <html>
 
-
 <!-- Header -->
 <head>
 	<title>{{title}}</title>
-	<link type="text/css" href="{% static 'songs/css/styles.css' %}" rel="stylesheet" />
+	<link type="text/css" href="{% static 'songs/css/base.css' %}" rel="stylesheet" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="shortcut icon" href="{% static 'songs/images/main.ico' %}" type="image/x-icon"/>
+	<link rel="shortcut icon" href="{% static 'songs/images/mainico.ico' %}" type="image/x-icon"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <!-- end Header -->
@@ -17,63 +16,23 @@
 <!-- Body -->
 <body>
 
-
 <!-- Mainmenu -->
 <table class="table-page" border=0 cellpadding="0" cellspacing="0">
-<tr><td valign=top>
-{% block mainmenu %}
-		<div class="header">
-			<ul id="mainmenu" class="mainmenu">
-			<li class="logo"><a href="{% url 'home' %}"><div class="logo"></div></a></li>
-{% for m in menu %}
-			<li><a href="{% url m.url_name %}">{{m.title}}</a></li>
-{% endfor %}
-				{% if request.user.is_authenticated %}
-				<li class="last"> {{user.username}} | <a href="{% url 'logout' %}">Выйти</a></li>
-				{% else %}
-				<li class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a></li>
-				{% endif %}
-			</ul>
-			<div class="clear"></div>
-		</div>
-{% endblock mainmenu %}
-
-
-<!-- left Sidebar -->
-<table class="table-content" border=0 cellpadding="0" cellspacing="0">
-<tr>
-	<td valign="top" class="left-chapters">
-	<ul id="leftchapters">
-
-{% if album_selected == 0 %}
-	<li class="selected">Альбомы</li>
-{% else %}
-	<li><a href="{% url 'albums' %}">Альбомы</a></li>
-{% endif %}
-
-{% if author_selected == 0 %}
-	<li class="selected">Исполнители</li>
-{% else %}
-	<li><a href="{% url 'authors' %}">Исполнители</a></li>
-{% endif %}
-	
-{% if genre_selected == 0 %}
-	<li class="selected">Все жанры</li>
-{% else %}
-	<li><a href="{% url 'home' %}">Все жанры</a></li>
-{% endif %}
-
-{% for g in genres %}
-{% if g.get_songs.count > 0 %}
-	{% if g.pk == genre_selected %}
-		<li class="selected">· {{g.name}}</li>
-	{% else %}
-		<li><a href="{{ g.get_absolute_url }}">· {{g.name}}</a></li>
-	{% endif %}
-{% endif %}
-{% endfor %}
-	</ul>
-</td>
+  <tr>
+    <td valign=top>
+      {% block mainmenu %}
+		  <div class="header">
+			  <ul id="mainmenu" class="mainmenu">
+		      <li class="logo"><a href="{% url 'home' %}"><div class="logo"></div></a></li>
+		      <li><a href="{% url 'home' %}">Песни</a></li>
+		      <li><a href="{% url 'authors' %}">Исполнители</a></li>
+		      <li><a href="{% url 'albums' %}">Альбомы</a></li>
+			  <li class="last"> {{user.username}} | <a href="{% url 'logout' %}">Выйти</a></li>
+			  </ul>
+			  <div class="clear"></div>
+		  </div>
+      {% endblock mainmenu %}
+	  <table class="table-content" border=0 cellpadding="0" cellspacing="0">
 
 
 <!-- Breadcrumbs -->
@@ -81,12 +40,10 @@
 	{% block breadcrumbs %}
 	{% endblock %}
 
-
 <!-- Content -->
 <div class="content-text">
 	{% block content %}
 	{% endblock %}
-
 
 <!-- Pagination -->
 {% if page_obj.has_other_pages %}
@@ -120,13 +77,26 @@
 
 <!-- Footer -->
 </div>
-</td></tr></table>
-</td></tr>
-<tr><td valign=top>
-	<div id="footer">
-		<p>&copy; 2023 Сайт начинающего программиста.</p>
-	</div>
-</td></tr></table>
+	</td>
+		</tr>
+			</table>
+				</td>
+					</tr>
+						<div class="footer_syka">
+							<tr class="foot">
+								<td valign=top class="footer_blya">
+									<footer class="footer" id="footer">
+										<p>&copy; 
+											2023 Сайт начинающего программиста.
+											<a href="{% url 'about' %}">О сайте</a>
+										</p>
+									</footer>
+								</td>
+							</tr>
+						</div>
+			</table>
+</div>
+
 <!-- end Footer -->
 
 

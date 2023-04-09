@@ -55,7 +55,7 @@ class AddAlbumForm(forms.ModelForm):
 
 class RegisterUserForm(UserCreationForm):
     username = forms.CharField(
-        label='Логин',
+        label='Login',
         widget=forms.TextInput(attrs={'class': 'form-input'}),
     )
     email = forms.EmailField(
@@ -63,11 +63,11 @@ class RegisterUserForm(UserCreationForm):
         widget=forms.EmailInput(attrs={'class': 'form-input'}),
     )
     password1 = forms.CharField(
-        label='Пароль',
+        label='Password',
         widget=forms.PasswordInput(attrs={'class': 'form-input'}),
     )
     password2 = forms.CharField(
-        label='Повтор пароля',
+        label='Password again',
         widget=forms.PasswordInput(attrs={'class': 'form-input'}),
     )
 
@@ -78,11 +78,11 @@ class RegisterUserForm(UserCreationForm):
 
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(
-        label='Логин',
+        label='Login',
         widget=forms.TextInput(attrs={'class': 'form-input'}),
     )
     password = forms.CharField(
-        label='Пароль',
+        label='Password',
         widget=forms.PasswordInput(attrs={'class': 'form-input'}),
     )
 
