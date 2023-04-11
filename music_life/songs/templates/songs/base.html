@@ -4,11 +4,11 @@
 
 <!-- Header -->
 <head>
-	<title>{{title}}</title>
-	<link type="text/css" href="{% static 'songs/css/base.css' %}" rel="stylesheet" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="shortcut icon" href="{% static 'songs/images/mainico.ico' %}" type="image/x-icon"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <link type="text/css" href="{% static 'songs/css/base.css' %}" rel="stylesheet" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="shortcut icon" href="{% static 'songs/images/mainico.ico' %}" type="image/x-icon"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <!-- end Header -->
 
@@ -20,30 +20,31 @@
 <table class="table-page" border=0 cellpadding="0" cellspacing="0">
   <tr>
     <td valign=top>
-      {% block mainmenu %}
-		  <div class="header">
-			  <ul id="mainmenu" class="mainmenu">
-		      <li class="logo"><a href="{% url 'home' %}"><div class="logo"></div></a></li>
-		      <li><a href="{% url 'home' %}">Песни</a></li>
-		      <li><a href="{% url 'authors' %}">Исполнители</a></li>
-		      <li><a href="{% url 'albums' %}">Альбомы</a></li>
-			  <li class="last"> {{user.username}} | <a href="{% url 'logout' %}">Выйти</a></li>
-			  </ul>
-			  <div class="clear"></div>
-		  </div>
-      {% endblock mainmenu %}
-	  <table class="table-content" border=0 cellpadding="0" cellspacing="0">
+        {% block mainmenu %}
+      <div class="header">
+        <ul id="mainmenu" class="mainmenu">
+          <li class="logo"><a href="{% url 'home' %}"><div class="logo"></div></a></li>
+          <li><a href="{% url 'home' %}">Песни</a></li>
+          <li><a href="{% url 'authors' %}">Исполнители</a></li>
+          <li><a href="{% url 'albums' %}">Альбомы</a></li>
+
+          <li class="last"> {{user.username}} | <a href="{% url 'logout' %}">Выйти</a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+        {% endblock mainmenu %}
+    <table class="table-content" border=0 cellpadding="0" cellspacing="0">
 
 
 <!-- Breadcrumbs -->
 <td valign="top" class="content">
-	{% block breadcrumbs %}
-	{% endblock %}
+  {% block breadcrumbs %}
+  {% endblock %}
 
 <!-- Content -->
 <div class="content-text">
-	{% block content %}
-	{% endblock %}
+  {% block content %}
+  {% endblock %}
 
 <!-- Pagination -->
 {% if page_obj.has_other_pages %}
@@ -51,7 +52,7 @@
 
 {% if page_obj.has_previous %}
 <li class="page-num">
-	<a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+  <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
 </li>
 {% endif %}
 
@@ -67,7 +68,7 @@
 
 {% if page_obj.has_next %}
 <li class="page-num">
-	<a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+  <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
 </li>
 {% endif %}
 
@@ -77,24 +78,24 @@
 
 <!-- Footer -->
 </div>
-	</td>
-		</tr>
-			</table>
-				</td>
-					</tr>
-						<div class="footer_syka">
-							<tr class="foot">
-								<td valign=top class="footer_blya">
-									<footer class="footer" id="footer">
-										<p>&copy; 
-											2023 Сайт начинающего программиста.
-											<a href="{% url 'about' %}">О сайте</a>
-										</p>
-									</footer>
-								</td>
-							</tr>
-						</div>
-			</table>
+  </td>
+    </tr>
+      </table>
+        </td>
+          </tr>
+            <div class="footer_syka">
+              <tr class="foot">
+                <td valign=top class="footer_blya">
+                  <footer class="footer" id="footer">
+                    <p>&copy; 
+                      2023 Сайт начинающего программиста.
+                      <a href="{% url 'about' %}">О сайте</a>
+                    </p>
+                  </footer>
+                </td>
+              </tr>
+            </div>
+      </table>
 </div>
 
 <!-- end Footer -->
