@@ -181,7 +181,7 @@ class LoginUser(DataMixin, LoginView):
 
 class ContactFormView(LoginRequiredMixin, DataMixin, FormView):
     form_class = ContactForm
-    template_name = None
+    template_name = 'songs/contacus.html'
     success_url = reverse_lazy('home')
 
     def get_context_data(self, *, object_list=None, **kwargs):
