@@ -1,19 +1,18 @@
 # Music_Life
 
 ### Авторы
-1. https://github.com/CapitainFan - backend
-2. https://github.com/federal2202 - frontend, disign
-
-### Описание
-...
+1. https://github.com/CapitainFan - backend;
+2. https://github.com/federal2202 - frontend, disign;
 
 ### Технологии
-CSS
-Django
-HTML
-JavaScript
-Jinja2
-Python
+CSS ;
+Django ;
+HTML ;
+JavaScript ;
+Jinja2 ;
+Python ;
+API ;
+DRF ;
 
 ### Запуск проекта в dev-режиме
 - Установите и активируйте виртуальное окружение
