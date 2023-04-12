@@ -9,98 +9,130 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="shortcut icon" href="{% static 'songs/images/mainico.ico' %}" type="image/x-icon"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/
+  font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
 </head>
 <!-- end Header -->
 
 
 <!-- Body -->
 <body>
-
 <!-- Mainmenu -->
-<table class="table-page" border=0 cellpadding="0" cellspacing="0">
-  <tr>
-    <td valign=top>
-        {% block mainmenu %}
-      <div class="header">
-        <ul id="mainmenu" class="mainmenu">
-          <li class="logo"><a href="{% url 'home' %}"><div class="logo"></div></a></li>
-          <li><a href="{% url 'home' %}">Песни</a></li>
-          <li><a href="{% url 'authors' %}">Исполнители</a></li>
-          <li><a href="{% url 'albums' %}">Альбомы</a></li>
+<div class="hero">
+  <nav>
+    <h2 class="logo">Noti<span>fy</span></h2>
+    <ul>
+      <li><a href="{% url 'home' %}">Songs</a></li>
+      <li><a href="{% url 'authors' %}">Performers</a></li>
+      <li><a href="{% url 'albums' %}">Albums</a></li>
+      <li><a href="{% url 'about' %}">About Us</a></li>
+      <li><a href="{% url 'home' %}">Contact US</a></li>
+    </ul>
+    <a href="{% url 'logout' %}"class="btn">Log Out</a>
+  </nav>
 
-          <li class="last"> {{user.username}} | <a href="{% url 'logout' %}">Выйти</a></li>
-        </ul>
-        <div class="clear"></div>
-      </div>
-        {% endblock mainmenu %}
-    <table class="table-content" border=0 cellpadding="0" cellspacing="0">
+  <div class="content">
+    <h4>Hello, welcome to</h4>
+    <h1>Notify <span>Music</span></h1>
+    <h3>relaxing website.</h3>
+  </div>
+</div>
 
-
-<!-- Breadcrumbs -->
-<td valign="top" class="content">
-  {% block breadcrumbs %}
-  {% endblock %}
 
 <!-- Content -->
 <div class="content-text">
-  {% block content %}
-  {% endblock %}
+    {% block content %}
+    {% endblock %}
+</div>
 
-<!-- Pagination -->
+<div class="service">
+  <div class="title">
+    <h2>Our Services</h2>
+  </div>
+  <div class="box">
+    <div class="card">
+      <i class="fa-solid fa-record-vinyl"></i>
+      <h5>Add Album</h5>
+      <div class="pra">
+        <p>Add your favourite album and discuss it with friends , family or whoever you want .
+          Dont forget to recommend us , enjoy.</p>
+
+        <p style="text-align: center;">
+          <a href="{% url 'add_album' %}" class="button">Add</a>
+        </p>
+      </div>
+    </div>
+    <div class="card">
+      <i class="fa-solid fa-user"></i>
+      <h5>Add Author</h5>
+      <div class="pra">
+        <p>Add post about music you like , tell about it , why you like it and why.
+          Dont forget that you aslo can discuss it with somebody .
+          Have fun.
+        </p>
+        <p style="text-align: center;">
+          <a href="{% url 'add_author' %}" class="button">Add</a>
+        </p>
+      </div>
+    </div>
+    <div class="card">
+      <i class="fa-solid fa-pen-to-square"></i>
+      <h5>Add Page</h5>
+      <div class="pra">
+        <p>Add your favourite album and discuss it with friends , family or whoever you want .
+          Dont forget to recommend us , enjoy.
+        </p>
+
+        <p style="text-align: center;">
+          <a href="{% url 'add_page' %}" class="button">Add</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="contact-me">
 {% if page_obj.has_other_pages %}
-<nav class="list-pages"><ul>
-
+  <nav class="list-pages">
+    <ul>
 {% if page_obj.has_previous %}
-<li class="page-num">
-  <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
-</li>
+      <li class="page-num">
+        <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+      </li>
 {% endif %}
-
 {% for p in paginator.page_range %}
 {% if page_obj.number == p %}
-<li class="page-num page-num-selected">{{ p }}</li>
+      <li class="page-num page-num-selected">{{ p }}</li>
 {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
-<li class="page-num">
-    <a href="?page={{ p }}">{{ p }}</a>
-</li>
+      <li class="page-num">
+        <a href="?page={{ p }}">{{ p }}</a>
+      </li>
 {% endif %}
 {% endfor %}
-
 {% if page_obj.has_next %}
-<li class="page-num">
-  <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
-</li>
+      <li class="page-num">
+        <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+      </li>
 {% endif %}
-
-</ul></nav>
+    </ul>
+  </nav>
 {% endif %}
-
-
-<!-- Footer -->
-</div>
-  </td>
-    </tr>
-      </table>
-        </td>
-          </tr>
-            <div class="footer_syka">
-              <tr class="foot">
-                <td valign=top class="footer_blya">
-                  <footer class="footer" id="footer">
-                    <p>&copy; 
-                      2023 Сайт начинающего программиста.
-                      <a href="{% url 'about' %}">О сайте</a>
-                    </p>
-                  </footer>
-                </td>
-              </tr>
-            </div>
-      </table>
 </div>
 
-<!-- end Footer -->
+<footer>
+  <p>The Site Of Junior Developers</p>
+  <a href="https://github.com/federal2202"><span>@federal2202</span></a>
+  <a href="https://github.com/CapitainFan"><span>@CapitainFan</span></a>
+</footer>
 
 
+
+<script src="https://kit.fontawesome.com/6186d4ea10.js" crossorigin="anonymous"></script>
 </body>
 </html>
 <!-- end Body -->
