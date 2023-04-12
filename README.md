@@ -1,8 +1,8 @@
 # Music_Life
 
 ### Авторы
-https://github.com/federal2202 - frontend, disign
-https://github.com/CapitainFan - backend
+https://github.com/federal2202 - frontend, disign ;
+https://github.com/CapitainFan - backend ;
 
 ### Описание
 ...
