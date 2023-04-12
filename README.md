@@ -5,14 +5,14 @@
 2. https://github.com/federal2202 - frontend, disign;
 
 ### Технологии
-CSS ;
-Django ;
-HTML ;
-JavaScript ;
-Jinja2 ;
-Python ;
-API ;
-DRF ;
+Jinja2 ;  
+JavaScript ;  
+HTML ;  
+CSS ;  
+Python 3.7  - https://docs.python.org/release/3.7.0/;  
+Django 2.2.19 - https://docs.djangoproject.com/en/4.1/ ;  
+API - https://docs.python.org/release/3.7.0/distutils/apiref.html?highlight=api;  
+DRF - https://www.django-rest-framework.org/  
 
 ### Запуск проекта в dev-режиме
 - Установите и активируйте виртуальное окружение
