@@ -24,13 +24,13 @@
 <!-- Mainmenu -->
 <div class="hero">
   <nav>
-    <h2 class="logo">Noti<span>fy</span></h2>
+    <a href="{% url 'home' %}"><h2 class="logo">Noti<span>fy</span></h2></a>
     <ul>
       <li><a href="{% url 'songs' %}">Songs</a></li>
       <li><a href="{% url 'authors' %}">Performers</a></li>
       <li><a href="{% url 'albums' %}">Albums</a></li>
       <li><a href="{% url 'about' %}">About Us</a></li>
-      <li><a href="{% url 'contactus' %}">Contact US</a></li>
+      <li><a href="{% url 'contactus' %}">Contact Us</a></li>
     </ul>
     <a href="{% url 'logout' %}"class="btn">Log Out</a>
   </nav>
