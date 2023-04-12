@@ -11,14 +11,24 @@ from .models import *
 from .mixins import *
 
 
-class Home(LoginRequiredMixin, DataMixin, ListView):
+class Home(LoginRequiredMixin, ListView):
     model = Songs
-    template_name = 'songs/index.html'
+    template_name = 'songs/main.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Notify'
+        return context
+
+
+class Songss(LoginRequiredMixin, DataMixin, ListView):
+    model = Songs
+    template_name = 'songs/songs.html'
     context_object_name = 'posts'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title='Notify', genre_selected=0)
+        g_def = self.get_user_context(title='Songs', genre_selected=0)
         return dict(list(context.items()) + list(g_def.items()))
 
     def get_queryset(self):
