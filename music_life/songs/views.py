@@ -5,6 +5,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
+import qrcode
+from django.http import HttpResponse
 
 from .forms import *
 from .models import *
@@ -19,20 +21,6 @@ class Home(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Notify'
         return context
-
-
-class Songss(LoginRequiredMixin, DataMixin, ListView):
-    model = Songs
-    template_name = 'songs/songs.html'
-    context_object_name = 'posts'
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        g_def = self.get_user_context(title='Songs', genre_selected=0)
-        return dict(list(context.items()) + list(g_def.items()))
-
-    def get_queryset(self):
-        return Songs.objects.filter(is_published=True)
 
 
 class AddPage(LoginRequiredMixin, DataMixin, CreateView):
@@ -115,21 +103,18 @@ class ShowAuthor(LoginRequiredMixin, DataMixin, DetailView):
         return dict(list(context.items()) + list(g_def.items()))
 
 
-class SongsGener(LoginRequiredMixin, DataMixin, ListView):
+class Songss(LoginRequiredMixin, DataMixin, ListView):
     model = Songs
-    template_name = 'songs/index.html'
+    template_name = 'songs/songs.html'
     context_object_name = 'posts'
-    allow_empty = False
-
-    def get_queryset(self):
-        return Songs.objects.filter(genre__slug=self.kwargs['genre_slug'], is_published=True)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        g = Genre.objects.get(slug=self.kwargs['genre_slug'])
-        g_def = self.get_user_context(title='Genre - ' + str(g.name),
-                                      genre_selected=g.pk)
+        g_def = self.get_user_context(title='Songs', genre_selected=0)
         return dict(list(context.items()) + list(g_def.items()))
+
+    def get_queryset(self):
+        return Songs.objects.filter(is_published=True)
 
 
 class AuthorsList(LoginRequiredMixin, DataMixin, ListView):
@@ -221,3 +206,22 @@ def logout_user(request):
 
 def pageNotFound(request, exception):
     return render(request, 'songs/pagenotfound.html')
+
+
+def generate_qr_code(request):
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data('https://github.com/CapitainFan/music_life')
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+    response = HttpResponse(content_type="image/png")
+    img.save(response, "PNG")
+    return response
+
+
+def get_qr_code(request):
+    return render(request, 'songs/qr.html')
