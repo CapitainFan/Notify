@@ -225,3 +225,17 @@ def generate_qr_code(request):
 
 def get_qr_code(request):
     return render(request, 'songs/qr.html')
+
+
+def search(request):
+    return render(request, 'songs/search.html')
+
+
+class SongSearchView(LoginRequiredMixin, ListView):
+    model = Songs
+    template_name = 'songs/song_search.html'
+    context_object_name = 'song_list'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return Songs.objects.filter(title__icontains=query)

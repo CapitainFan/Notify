@@ -19,5 +19,7 @@ urlpatterns = [
     path('post/<slug:post_slug>/', ShowPost.as_view(), name='post'),
     path('author/<slug:author_slug>/', ShowAuthor.as_view(), name='author'),
     path('qr-code/', generate_qr_code, name='qr-code'),
-    path('qr/', get_qr_code, name='qr'),    
+    path('qr/', get_qr_code, name='qr'),
+    path('search/', search, name='search'),
+    path('song_search/', SongSearchView.as_view(), name='song_search'),
 ]
