@@ -7,6 +7,7 @@ from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 import qrcode
 from django.http import HttpResponse
+from django.db.models import Q
 
 from .forms import *
 from .models import *
@@ -234,8 +235,15 @@ def search(request):
 class SongSearchView(LoginRequiredMixin, ListView):
     model = Songs
     template_name = 'songs/song_search.html'
-    context_object_name = 'song_list'
+    context_object_name = 'results'
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        return Songs.objects.filter(title__icontains=query)
+        results = []
+        songs = Songs.objects.filter(Q(title__icontains=query))
+        albums = Album.objects.filter(Q(name__icontains=query))
+        authors = Author.objects.filter(Q(name__icontains=query))
+        results += songs
+        results += albums
+        results += authors
+        return results
