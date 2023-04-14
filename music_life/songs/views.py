@@ -5,9 +5,9 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-import qrcode
 from django.http import HttpResponse
 from django.db.models import Q
+import qrcode
 
 from .forms import *
 from .models import *
@@ -200,13 +200,39 @@ class AboutView(LoginRequiredMixin, DataMixin, TemplateView):
         return dict(list(context.items()) + list(g_def.items()))
 
 
+class SongSearchView(DataMixin, LoginRequiredMixin, ListView):
+    model = Songs
+    template_name = 'songs/search_results.html'
+    context_object_name = 'results'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        g_def = self.get_user_context(title='Search')
+        return dict(list(context.items()) + list(g_def.items()))
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        results = []
+        songs = Songs.objects.filter(Q(title__icontains=query))
+        albums = Album.objects.filter(Q(name__icontains=query))
+        authors = Author.objects.filter(Q(name__icontains=query))
+        results += songs
+        results += albums
+        results += authors
+        return results
+
+
+def qr_code_page(request):
+    return render(request, 'songs/qr.html')
+
+
+def search_page(request):
+    return render(request, 'songs/search.html')
+
+
 def logout_user(request):
     logout(request)
     return redirect('login')
-
-
-def pageNotFound(request, exception):
-    return render(request, 'songs/pagenotfound.html')
 
 
 def generate_qr_code(request):
@@ -222,28 +248,3 @@ def generate_qr_code(request):
     response = HttpResponse(content_type="image/png")
     img.save(response, "PNG")
     return response
-
-
-def get_qr_code(request):
-    return render(request, 'songs/qr.html')
-
-
-def search(request):
-    return render(request, 'songs/search.html')
-
-
-class SongSearchView(LoginRequiredMixin, ListView):
-    model = Songs
-    template_name = 'songs/song_search.html'
-    context_object_name = 'results'
-
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        results = []
-        songs = Songs.objects.filter(Q(title__icontains=query))
-        albums = Album.objects.filter(Q(name__icontains=query))
-        authors = Author.objects.filter(Q(name__icontains=query))
-        results += songs
-        results += albums
-        results += authors
-        return results
