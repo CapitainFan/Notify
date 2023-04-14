@@ -21,5 +21,5 @@ urlpatterns = [
     path('post/<slug:post_slug>/', ShowPost.as_view(), name='post'),
     path('author/<slug:author_slug>/', ShowAuthor.as_view(), name='author'),
     path('qr-code/', generate_qr_code, name='qr-code'),
-    path('search/', SongSearchView.as_view(), name='search_results'),
+    path('search_results/', SongSearchView.as_view(), name='search_results'),
 ]
