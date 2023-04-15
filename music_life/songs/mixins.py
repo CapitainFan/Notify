@@ -1,6 +1,9 @@
 from .models import *
 
 class DataMixin:
+    '''
+    Базовый mixin для view классов
+    '''
     paginate_by = 3
 
     def get_user_context(self, **kwargs):

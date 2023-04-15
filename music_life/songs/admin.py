@@ -10,7 +10,8 @@ class SongsAdmin(admin.ModelAdmin):
     list_editable = ('is_published',)
     list_filter = ('is_published', 'time_create', 'genre')
     prepopulated_fields = {"slug": ("title",)}
-    fields = ('title', 'slug', 'content', 'photo', 'get_html_photo', 'author', 'genre', 'album', 'is_single', 'is_published', 'time_create', 'time_update')
+    fields = ('title', 'slug', 'content', 'photo', 'get_html_photo', 'author',
+              'genre', 'album', 'is_single', 'is_published', 'time_create', 'time_update')
     readonly_fields = ('time_create', 'time_update', 'get_html_photo')
 
     def get_html_photo(self, object):

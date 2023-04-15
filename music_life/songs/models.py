@@ -4,6 +4,9 @@ from django.core.exceptions import ValidationError
 
 
 class Author(models.Model):
+    '''
+    Модель исполнителя песен
+    '''
     name = models.CharField(
         max_length=100,
         db_index=True,
@@ -39,6 +42,9 @@ class Author(models.Model):
 
 
 class Album(models.Model):
+    '''
+    Модель альбомов
+    '''
     name = models.CharField(
         max_length=100,
         db_index=True,
@@ -74,6 +80,9 @@ class Album(models.Model):
 
 
 class Genre(models.Model):
+    '''
+    Модель жанров песен
+    '''
     name = models.CharField(
         max_length=100,
         db_index=True,
@@ -100,6 +109,9 @@ class Genre(models.Model):
 
 
 class Songs(models.Model):
+    '''
+    Модель песен
+    '''
     title = models.CharField(
         max_length=255,
         verbose_name='Название песни',
@@ -161,9 +173,13 @@ class Songs(models.Model):
 
     def clean_email(self):
         if self.is_single and self.album is not None:
-            raise ValidationError("Песня не может быть одновременно синглом и входить в альбом")
+            raise ValidationError(
+                "Песня не может быть одновременно синглом и входить в альбом"
+            )
         if not self.is_single and self.album is None:
-            raise ValidationError("Песня не может быть не синглом и не входить в альбом")
+            raise ValidationError(
+                "Песня не может быть не синглом и не входить в альбом"
+            )
 
     class Meta:
         verbose_name = 'Песня'

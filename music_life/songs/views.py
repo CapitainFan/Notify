@@ -15,6 +15,9 @@ from .mixins import *
 
 
 class Home(LoginRequiredMixin, ListView):
+    '''
+    Главная старница
+    '''
     model = Songs
     template_name = 'songs/main.html'
 
@@ -25,6 +28,9 @@ class Home(LoginRequiredMixin, ListView):
 
 
 class AddPage(LoginRequiredMixin, DataMixin, CreateView):
+    '''
+    Добавить пост
+    '''
     form_class = AddPostForm
     template_name = 'songs/addpage.html'
     success_url = reverse_lazy('home')
@@ -38,6 +44,9 @@ class AddPage(LoginRequiredMixin, DataMixin, CreateView):
 
 
 class AddAuthor(LoginRequiredMixin, DataMixin, CreateView):
+    '''
+    Добавить автора
+    '''
     form_class = AddAuthorForm
     template_name = 'songs/addauthor.html'
     success_url = reverse_lazy('home')
@@ -51,6 +60,9 @@ class AddAuthor(LoginRequiredMixin, DataMixin, CreateView):
 
 
 class AddAlbum(LoginRequiredMixin, DataMixin, CreateView):
+    '''
+    Добавить альбом
+    '''
     form_class = AddAlbumForm
     template_name = 'songs/addalbum.html'
     success_url = reverse_lazy('home')
@@ -64,6 +76,9 @@ class AddAlbum(LoginRequiredMixin, DataMixin, CreateView):
 
 
 class ShowAlbum(LoginRequiredMixin, DataMixin, DetailView):
+    '''
+    Просмотр одного альбома
+    '''
     model = Album
     template_name = 'songs/showalbum.html'
     slug_url_kwarg = 'album_slug'
@@ -76,6 +91,9 @@ class ShowAlbum(LoginRequiredMixin, DataMixin, DetailView):
 
 
 class ShowPost(LoginRequiredMixin, DataMixin, DetailView):
+    '''
+    Просмотр одного поста
+    '''
     model = Songs
     template_name = 'songs/showsong.html'
     slug_url_kwarg = 'post_slug'
@@ -88,6 +106,9 @@ class ShowPost(LoginRequiredMixin, DataMixin, DetailView):
 
 
 class ShowAuthor(LoginRequiredMixin, DataMixin, DetailView):
+    '''
+    Просмотр одного исполнителя
+    '''
     model = Author
     template_name = 'songs/showauthor.html'
     slug_url_kwarg = 'author_slug'
@@ -104,7 +125,10 @@ class ShowAuthor(LoginRequiredMixin, DataMixin, DetailView):
         return dict(list(context.items()) + list(g_def.items()))
 
 
-class Songss(LoginRequiredMixin, DataMixin, ListView):
+class SongsList(LoginRequiredMixin, DataMixin, ListView):
+    '''
+    Страница песен
+    '''
     model = Songs
     template_name = 'songs/songs.html'
     context_object_name = 'posts'
@@ -119,6 +143,9 @@ class Songss(LoginRequiredMixin, DataMixin, ListView):
 
 
 class AuthorsList(LoginRequiredMixin, DataMixin, ListView):
+    '''
+    Страница испонителей
+    '''
     model = Author
     template_name = 'songs/authors.html'
     context_object_name = 'authors'
@@ -133,6 +160,9 @@ class AuthorsList(LoginRequiredMixin, DataMixin, ListView):
 
 
 class AlbumsList(LoginRequiredMixin, DataMixin, ListView):
+    '''
+    Страница альбомов
+    '''
     model = Album
     template_name = 'songs/albums.html'
     context_object_name = 'albums'
@@ -147,6 +177,9 @@ class AlbumsList(LoginRequiredMixin, DataMixin, ListView):
 
 
 class RegisterUser(DataMixin, CreateView):
+    '''
+    Страница регистрации
+    '''
     form_class = RegisterUserForm
     template_name = 'songs/register.html'
     success_url = reverse_lazy('login')
@@ -163,6 +196,9 @@ class RegisterUser(DataMixin, CreateView):
 
 
 class LoginUser(DataMixin, LoginView):
+    '''
+    Страница авторизации
+    '''
     form_class = LoginUserForm
     template_name = 'songs/login.html'
 
@@ -175,7 +211,10 @@ class LoginUser(DataMixin, LoginView):
         return reverse_lazy('home')
 
 
-class ContactFormView(LoginRequiredMixin, DataMixin, FormView):
+class ContactView(LoginRequiredMixin, DataMixin, FormView):
+    '''
+    Страница контакта
+    '''
     form_class = ContactForm
     template_name = 'songs/contacus.html'
     success_url = reverse_lazy('home')
@@ -191,6 +230,9 @@ class ContactFormView(LoginRequiredMixin, DataMixin, FormView):
 
 
 class AboutView(LoginRequiredMixin, DataMixin, TemplateView):
+    '''
+    Страница про нас
+    '''
     template_name = 'songs/about.html'
     success_url = reverse_lazy('home')
 
@@ -200,7 +242,10 @@ class AboutView(LoginRequiredMixin, DataMixin, TemplateView):
         return dict(list(context.items()) + list(g_def.items()))
 
 
-class SongSearchView(DataMixin, LoginRequiredMixin, ListView):
+class SearchView(DataMixin, LoginRequiredMixin, ListView):
+    '''
+    Страница найденых песен
+    '''
     model = Songs
     template_name = 'songs/search_results.html'
     context_object_name = 'results'
@@ -223,19 +268,31 @@ class SongSearchView(DataMixin, LoginRequiredMixin, ListView):
 
 
 def qr_code_page(request):
+    '''
+    Страница с QR-code
+    '''
     return render(request, 'songs/qr.html')
 
 
 def search_page(request):
+    '''
+    Страница поиска
+    '''
     return render(request, 'songs/search.html')
 
 
 def logout_user(request):
+    '''
+    Функция для выхода
+    '''
     logout(request)
     return redirect('login')
 
 
 def generate_qr_code(request):
+    '''
+    Функция генерации QR-code
+    '''
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,

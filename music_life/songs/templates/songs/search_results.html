@@ -5,7 +5,7 @@
         <h2>Результаты поиска:</h2>
         <ul>
         {% for result in results %}
-            <h2>: <a href="{{ result.get_absolute_url }}">{{ result.name }}{{ result.title }}</a></h2>
+            <h2><a href="{{ result.get_absolute_url }}">{{ result.name }}{{ result.title }}</a></h2>
         {% endfor %}
         </ul>
     {% else %}
