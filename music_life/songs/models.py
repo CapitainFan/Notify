@@ -50,11 +50,9 @@ class Album(models.Model):
         db_index=True,
         verbose_name='Название альбома',
     )
-    author = models.ForeignKey(
+    author = models.ManyToManyField(
         Author,
-        verbose_name='Исполнитель',
-        related_name='get_album',
-        on_delete=models.PROTECT,
+        verbose_name='Исполнители',
     )
     photo = models.ImageField(
         upload_to='photos/%Y/%m/%d/',

@@ -37,7 +37,7 @@ class AuthorAdmin(admin.ModelAdmin):
 
 
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'author', 'get_html_photo')
+    list_display = ('id', 'name', 'get_html_photo')
     list_display_links = ('id', 'name')
     search_fields = ('name',)
     prepopulated_fields = {"slug": ("name",)}
