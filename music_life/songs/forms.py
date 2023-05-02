@@ -11,11 +11,11 @@ class AddPostForm(forms.ModelForm):
     '''
     Форма для добавления поста
     '''
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['author'].empty_label = "Исполнитель не выбран"
-        self.fields['genre'].empty_label = "Жанр не выбран"
-        self.fields['album'].empty_label = "Альбом не выбран"
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['author'].empty_label = "Исполнитель не выбран"
+    #     self.fields['genre'].empty_label = "Жанр не выбран"
+    #     self.fields['album'].empty_label = "Альбом не выбран"
 
     class Meta:
         model = Songs
@@ -51,9 +51,9 @@ class AddAlbumForm(forms.ModelForm):
     '''
     Форма для добавления альбома
     '''
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['author'].empty_label = "Исполнитель не выбран"
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['author'].empty_label = "Исполнитель не выбран"
 
     class Meta:
         model = Album

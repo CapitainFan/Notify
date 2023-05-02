@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+
+<!-- Header -->
+<head>
+	<title>{{title}}</title>
+  <link type="text/css" href="{% static 'songs/css/addalbum.css' %}" rel="stylesheet" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="shortcut icon" href="{% static 'songs/images/logo.ico' %}" type="image/x-icon"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+</head>
+
+<body>
+    <div class="hero">
+        <nav>
+          <a href="{% url 'home' %}" class="home_link"><h2 class="logo">Noti<span>fy</span></h2></a>
+          <ul>
+            <li><a href="{% url 'songs' %}">Songs</a></li>
+            <li><a href="{% url 'authors' %}">Performers</a></li>
+            <li><a href="{% url 'albums' %}">Albums</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+            <li><a href="{% url 'qr' %}">QR-code</a></li>
+            <li><a href="{% url 'search' %}">Search</a></li>
+          </ul>
+          <a href="{% url 'logout' %}"class="btn">Log Out</a>
+        </nav>
+        <div class="add_album">
+          <div class="wrapperr">
+            <div class="title">
+              Album Adding
+            </div>
+            <div class="form">
+              {% csrf_token %}
+              <div class="input_field">
+                <label for="{{ form.name.id_for_label }}">Название альбома:</label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                  <p class="help is-danger">{{ form.name.errors|first }}</p>
+                {% endif %}
+              </div>
+              <div class="input_field">
+                <label for="{{ form.slug.id_for_label }}">Slug:</label>
+                {{ form.slug }}
+                {% if form.slug.errors %}
+                  <p class="help is-danger">{{ form.slug.errors|first }}</p>
+                {% endif %}
+              </div>
+              <div class="input_field">
+                <label for="{{ form.author.id_for_label }}">Исполнитель:</label>
+                {{ form.author }}
+                {% if form.author.errors %}
+                  <p class="help is-danger">{{ form.author.errors|first }}</p>
+                {% endif %}
+              </div>
+              <div class="input_field">
+                <label for="{{ form.photo.id_for_label }}">Фото:</label>
+                {{ form.photo }}
+  
+              </div>
+              <div class="input_field">
+                <input type="submit" class="btn" value="Добавить">Добавить</input>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+        
+</body>

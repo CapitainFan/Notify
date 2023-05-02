@@ -5,7 +5,7 @@
 <!-- Header -->
 <head>
   <title>{{title}}</title>
-  <link type="text/css" href="{% static 'songs/css/basecss.css' %}" rel="stylesheet" />
+  <link type="text/css" href="{% static 'songs/css/base.css' %}" rel="stylesheet" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="shortcut icon" href="{% static 'songs/images/logo.ico' %}" type="image/x-icon"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,7 @@
 <!-- Mainmenu -->
 <div class="hero">
   <nav>
-    <a href="{% url 'home' %}"><h2 class="logo">Noti<span>fy</span></h2></a>
+    <a href="{% url 'home' %}" class="home_link"><h2 class="logo">Noti<span>fy</span></h2></a>
     <ul>
       <li><a href="{% url 'songs' %}">Songs</a></li>
       <li><a href="{% url 'authors' %}">Performers</a></li>
@@ -32,7 +32,6 @@
       <li><a href="{% url 'about' %}">About Us</a></li>
       <li><a href="{% url 'contactus' %}">Contact Us</a></li>
       <li><a href="{% url 'qr' %}">QR-code</a></li>
-      <li><a href="{% url 'search' %}">Search</a></li>
     </ul>
     <a href="{% url 'logout' %}"class="btn">Log Out</a>
   </nav>
@@ -41,6 +40,12 @@
     <h4>Hello, welcome to</h4>
     <h1>Notify <span>Music</span></h1>
     <h3>relaxing website.</h3>
+    <div class="newslatter">      
+      <form action="{% url 'search_results' %}" method="get">
+        <input type="text" name="q" placeholder="Enter Performer">
+        <input type="submit" name="submit" value="Search">
+      </form>
+    </div>
   </div>
 </div>
 
@@ -73,7 +78,7 @@
       <h5>Add Author</h5>
       <div class="pra">
         <p>Add post about music you like , tell about it , why you like it and why.
-          Dont forget that you aslo can discuss it with somebody .
+          Dont forget that you also can discuss it with somebody .
           Have fun.
         </p>
         <p style="text-align: center;">
