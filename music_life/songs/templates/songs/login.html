@@ -14,7 +14,7 @@
 
 <body>
     <div class="login-container">
-        <h1 class="login-heading">Notify</h1>
+        <h1 class="login-heading">Noti<span>fy</span></h1>
         <form method="post" class="login-form">
           {% csrf_token %}
           <div class="form-group">
@@ -28,10 +28,10 @@
           <button type="submit" class="btn btn-primary">Войти</button>
         </form>
       </div>
-
       <div class="register_href">
-        <button class="btn_reg btn-primary"><a class="reg_href" href="{% url 'register' %}">Зарегистрироваться</a></button>
+        <a class="reg_href" href="{% url 'register' %}"><button class="btn_reg btn-primary">Зарегистрироваться</button></a>
       </div>
+    </div>
 </body>
 
 </html>

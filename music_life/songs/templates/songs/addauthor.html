@@ -1,20 +1,54 @@
-{% extends 'songs/base.html' %}
-
-{% block content %}
-<h1>{{title}}</h1>
-
-<form action="{% url 'add_author' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-
-    <div class="form-error">{{ form.non_field_errors }}</div>
-
-{% for f in form %}
-<p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
-<div class="form-error">{{ f.errors }}</div>
-{% endfor %}
+{% load static %}
+<!DOCTYPE html>
+<html>
 
 
-    <button type="submit">Добавить</button>
-</form>
-
-{% endblock %}
+<!-- Header -->
+<head>
+	<title>{{title}}</title>
+  <link type="text/css" href="{% static 'songs/css/base.css' %}" rel="stylesheet" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="shortcut icon" href="{% static 'songs/images/logo.ico' %}" type="image/x-icon"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+</head>
+<body>
+  <div class="hero">
+      <nav>
+        <a href="{% url 'home' %}" class="home_link"><h2 class="logo">Noti<span>fy</span></h2></a>
+        <ul>
+          <li><a href="{% url 'songs' %}">Songs</a></li>
+          <li><a href="{% url 'authors' %}">Performers</a></li>
+          <li><a href="{% url 'about' %}">About Us</a></li>
+          <li><a href="{% url 'qr' %}">QR-code</a></li>
+        </ul>
+        <a href="{% url 'logout' %}"class="btn">Log Out</a>
+      </nav>
+      <div class="add_album">
+        <div class="wrapperr">
+          <div class="title">
+            Performer Adding
+          </div>
+          <div class="form">
+            {% csrf_token %}
+            <div class="input_field">
+              <input type="text" name="name" id="id_name" placeholder="Name:" required>
+            </div>
+            <div class="input_field">
+              <input type="text" name="slug" id="id_slug" placeholder="Slug:" required>
+            </div>
+            <div class="input_field">
+                <textarea class="textarea" name="content" id="id_content" cols="60" rows="10" placeholder="Content:"></textarea>
+            </div>
+            <div class="input_fieldy">
+              <input class="last_inp" type="file" id="id_photo" accept="image/*">
+            </div> 
+            <div class="input_field">
+              <input type="submit" class="btn" value="Add Author"></input>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+      
+</body>

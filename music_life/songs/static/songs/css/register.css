@@ -2,7 +2,11 @@
 
 
 body{
-    background: url(./../images/bg.png);
+    background: #191919;
+}
+
+span {
+	color: #f9004d;
 }
 
 
@@ -14,7 +18,8 @@ body{
     background-color: #222;
     border-radius: 4px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-  }
+    border: 1px solid #f9004d;
+}
   
   .login-heading {
     margin-top: 10px;
@@ -23,13 +28,12 @@ body{
     color: white;
     text-align: center;
    font-family: 'Josefin Sans', sans-serif;
-  }
+}
   
   .login-form {
     display: block;
     margin-bottom: 15px;
-    ;
-  }
+}
   
   .form-group {
     margin-bottom: 20px;

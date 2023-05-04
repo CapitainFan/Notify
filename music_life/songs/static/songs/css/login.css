@@ -2,7 +2,7 @@
 
 
 body{
-    background: url(./../images/bg.png);
+    background: #191919;
 }
 
 
@@ -14,12 +14,17 @@ body{
     background-color: #222;
     border-radius: 4px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    border: 1px solid #f9004d;
+  }
+
+  .login-containeer {
+    border: 1px solid #f9004d;
   }
   
   .login-heading {
     margin-bottom: 20px;
     font-size: 48px;
-    color: #f9004d;
+    color: white;
     text-align: center;
     font-family: 'Josefin Sans', sans-serif;
   }
@@ -27,12 +32,12 @@ body{
   .login-form {
     display: block;
     margin-bottom: 20px;
-    ;
   }
   
   .form-group {
     margin-bottom: 20px;
     max-width: 378px;
+    color: white;
   }
   
   .form-group label {
@@ -87,7 +92,12 @@ body{
   }
 
 .register_href{
+  border: 1px solid #f9004d;
     max-width: 400px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
     margin: 0 auto;
     padding: 40px;
     background-color: #222;
@@ -98,16 +108,14 @@ body{
 
 }
 
-.register_href a{
-    margin-top: 20px;
+.register_href .btn_reg{
+    margin-top: 0px;
     color: #fff;
     text-align: center;
     font-size: 20px;
     text-decoration: none;
-    margin-left: 115.5px;
-    margin-right: 115.5px;
-    background-color: #f9004d;
-	  border: 2px solid transparent;
+    padding-left: 115.5px;
+    padding-right: 115.5px;
 }
 
 
@@ -143,4 +151,8 @@ body{
   color: white;
   background-color:#000;
   border-color: #f9004d;
+}
+
+span {
+	color: #f9004d;
 }

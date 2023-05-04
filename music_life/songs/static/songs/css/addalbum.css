@@ -86,7 +86,7 @@ nav ul li a:hover{
 .wrapperr{
 	max-width: 500px;
 	width: 100%;
-	background: white;
+	background: #191919;
 	margin: 20px auto;
 	padding: 30px;
 	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.125);
@@ -113,7 +113,7 @@ nav ul li a:hover{
 
 .wrapperr .form .input_field label{
 	width: 200px;
-	color: aliceblue;
+	color: #191919;
 	margin-right: 10px;
 	font-size: 14px;
 }
@@ -216,3 +216,4 @@ nav ul li a:hover{
 		margin-bottom: 5px;
 	}
 }
+
