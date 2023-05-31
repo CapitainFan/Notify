@@ -1,4 +1,6 @@
-# Music_Life
+# Notify
+
+![Image alt](https://github.com/CapitainFan/Notify/raw/main/pictures/main_page.png)
 
 ### Авторы
 1. https://github.com/CapitainFan - backend;
