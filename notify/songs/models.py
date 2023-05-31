@@ -1,6 +1,9 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+
+User = get_user_model()
 
 
 class Author(models.Model):
@@ -112,6 +115,11 @@ class Songs(models.Model):
     '''
     Модель песен
     '''
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='post',
+        verbose_name='Пользователь')
     title = models.CharField(
         max_length=255,
         verbose_name='Название песни',

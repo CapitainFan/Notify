@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('captcha/', include('captcha.urls')),
     path('', include('songs.urls')),
+    path('api/', include('api.urls')),
 ]
 
 if settings.DEBUG:

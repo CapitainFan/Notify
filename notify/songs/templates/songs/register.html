@@ -14,30 +14,42 @@
 </head>
 
 <body>
-    <div class="login-container">
-        <form class="login-form" method="post">
-            {% csrf_token %}
-            <h2 class="login-heading">Notify</h2>
-            <div class="form-group">
-              {{ form.username.label_tag }}
-              {{ form.username }}
-            </div>
-            <div class="form-group">
-              {{ form.email.label_tag }}
-              {{ form.email }}
-            </div>
-            <div class="form-group">
-              {{ form.password1.label_tag }}
-              {{ form.password1 }}
-            </div>
-            <div class="form-group">
-              {{ form.password2.label_tag }}
-              {{ form.password2 }}
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>
-        </form>
-        <div class="register-link">
-            Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a>
-        </div>    
-    </div>
+  <div class="login-container">
+      <form class="login-form" method="post">
+          {% csrf_token %}
+          <h2 class="login-heading">Notify</h2>
+          <div class="form-group">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+          </div>
+          <div class="form-group">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+          </div>
+          <div class="form-group">
+            {{ form.avatar.label_tag }}
+            {{ form.avatar }}
+          </div>
+          <div class="form-group">
+            {{ form.first_name.label_tag }}
+            {{ form.first_name }}
+          </div>
+          <div class="form-group">
+            {{ form.last_name.label_tag }}
+            {{ form.last_name }}
+          </div>
+          <div class="form-group">
+            {{ form.password1.label_tag }}
+            {{ form.password1 }}
+          </div>
+          <div class="form-group">
+            {{ form.password2.label_tag }}
+            {{ form.password2 }}
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>
+      </form>
+      <div class="register-link">
+          Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a>
+      </div>    
+  </div>
 </body>

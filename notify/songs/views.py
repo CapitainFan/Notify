@@ -150,7 +150,7 @@ class RegisterUser(DataMixin, CreateView):
     '''
     Страница регистрации
     '''
-    form_class = RegisterUserForm
+    form_class = MyUserCreationForm
     template_name = 'songs/register.html'
     success_url = reverse_lazy('login')
 
@@ -169,7 +169,7 @@ class LoginUser(DataMixin, LoginView):
     '''
     Страница авторизации
     '''
-    form_class = LoginUserForm
+    form_class = MyAuthenticationForm
     template_name = 'songs/login.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):

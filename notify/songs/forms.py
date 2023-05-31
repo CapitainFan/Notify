@@ -1,21 +1,73 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
+from users.models import MyUser
 from django.core.exceptions import ValidationError
 from captcha.fields import CaptchaField
 
 from .models import *
+
+from django.contrib.auth.forms import AuthenticationForm
+
+
+class MyUserCreationForm(UserCreationForm):
+    username = forms.CharField(
+        max_length=254,
+        required=True,
+        label='Login',
+        widget=forms.TextInput(attrs={'class': 'form-input'}),
+    )
+    email = forms.EmailField(
+        required=True,
+        max_length=254,
+        help_text='Required. Enter a valid email address.',
+        widget=forms.EmailInput(attrs={'class': 'form-input'}),
+        label='Почта',
+    )
+    avatar = forms.ImageField(
+        required=False,
+        label='Аватарка',
+    )
+    first_name = forms.CharField(
+        required=True,
+        max_length=30,
+        help_text='Required.',
+        widget=forms.TextInput(attrs={'class': 'form-input'}),
+    )
+    last_name = forms.CharField(
+        required=True,
+        max_length=30, 
+        help_text='Required.',
+        widget=forms.TextInput(attrs={'class': 'form-input'})
+    )
+    password1 = forms.CharField(
+        label='Password',
+        widget=forms.PasswordInput(attrs={'class': 'form-input'}),
+    )
+    password2 = forms.CharField(
+        label='Password again',
+        widget=forms.PasswordInput(attrs={'class': 'form-input'}),
+    )
+
+    class Meta:
+        model = MyUser
+        fields = ('username', 'email', 'password1', 'password2', 'avatar', 'first_name', 'last_name')
+
+
+class MyAuthenticationForm(AuthenticationForm):
+    username = forms.CharField(
+        label='Email',
+        widget=forms.TextInput(attrs={'class': 'form-input'}),
+    )
+    password = forms.CharField(
+        label='Password',
+        widget=forms.PasswordInput(attrs={'class': 'form-input'}),
+    )
 
 
 class AddPostForm(forms.ModelForm):
     '''
     Форма для добавления поста
     '''
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['author'].empty_label = "Исполнитель не выбран"
-    #     self.fields['genre'].empty_label = "Жанр не выбран"
-    #     self.fields['album'].empty_label = "Альбом не выбран"
 
     class Meta:
         model = Songs
@@ -51,9 +103,6 @@ class AddAlbumForm(forms.ModelForm):
     '''
     Форма для добавления альбома
     '''
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['author'].empty_label = "Исполнитель не выбран"
 
     class Meta:
         model = Album
@@ -61,46 +110,6 @@ class AddAlbumForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-input'}),
         }
-
-
-class RegisterUserForm(UserCreationForm):
-    '''
-    Форма регистрации
-    '''
-    username = forms.CharField(
-        label='Login',
-        widget=forms.TextInput(attrs={'class': 'form-input'}),
-    )
-    email = forms.EmailField(
-        label='Email',
-        widget=forms.EmailInput(attrs={'class': 'form-input'}),
-    )
-    password1 = forms.CharField(
-        label='Password',
-        widget=forms.PasswordInput(attrs={'class': 'form-input'}),
-    )
-    password2 = forms.CharField(
-        label='Password again',
-        widget=forms.PasswordInput(attrs={'class': 'form-input'}),
-    )
-
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password1', 'password2')
-
-
-class LoginUserForm(AuthenticationForm):
-    '''
-    Форма авторизации
-    '''
-    username = forms.CharField(
-        label='Login',
-        widget=forms.TextInput(attrs={'class': 'form-input'}),
-    )
-    password = forms.CharField(
-        label='Password',
-        widget=forms.PasswordInput(attrs={'class': 'form-input'}),
-    )
 
 
 class ContactForm(forms.Form):

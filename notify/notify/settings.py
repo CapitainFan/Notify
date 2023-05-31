@@ -16,6 +16,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1',]
 
+AUTH_USER_MODEL = 'users.MyUser'
 
 # Application definition
 
@@ -27,8 +28,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'songs.apps.SongsConfig',
+    'api.apps.ApiConfig',
+    'users.apps.UsersConfig',
     'debug_toolbar',
     'captcha',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -141,4 +145,11 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
         'LOCATION': os.path.join(BASE_DIR,'cache'),
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
 }
