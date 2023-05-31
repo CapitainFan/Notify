@@ -273,7 +273,7 @@ def generate_qr_code(request):
         box_size=10,
         border=4,
     )
-    qr.add_data('https://github.com/CapitainFan/music_life')
+    qr.add_data('https://github.com/CapitainFan/Notify/tree/main')
     qr.make(fit=True)
     img = qr.make_image(fill_color="black", back_color="white")
     response = HttpResponse(content_type="image/png")
