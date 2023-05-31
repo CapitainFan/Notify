@@ -1,0 +1,12 @@
+{% extends 'songs/base.html' %}
+
+{% block content %}
+
+<h3>
+   На сайте произошла ошибка или страница не найдена.
+   Если вы не авторизировались перейдите на страницу 
+   <a href="{% url 'register' %}"><span>регистрации</span></a> или 
+   <a href="{% url 'login' %}"><span>авторизации</span></a>.
+</h3>
+
+{% endblock %}

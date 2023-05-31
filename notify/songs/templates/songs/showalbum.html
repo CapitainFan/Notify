@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<!-- Header -->
+<head>
+  <title>{{title}}</title>
+  <link type="text/css" href="{% static 'songs/css/base.css' %}" rel="stylesheet" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="shortcut icon" href="{% static 'songs/images/logo.ico' %}" type="image/x-icon"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/
+  font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+</head>
+<!-- end Header -->
+
+
+<!-- Body -->
+<body>
+<!-- Mainmenu -->
+<div class="hero">
+	<nav>
+    	<a href="{% url 'home' %}" class="home_link"><h2 class="logo">Noti<span>fy</span></h2></a>
+    	<ul>
+      		<li><a href="{% url 'home' %}">Home</a></li>
+      		<li><a href="{% url 'authors' %}">Performers</a></li>
+      		<li><a href="{% url 'about' %}">About Us</a></li>
+      		<li><a href="{% url 'qr' %}">QR-code</a></li>
+    	</ul>
+    	<a href="{% url 'logout' %}"class="btn">Log Out</a>
+  	</nav>
+  	<div class="content-text">
+		{% if album.photo %}
+		<p class="lox"><img class="img-article-left thumb" src="{{album.photo.url}}"></p>
+		{% endif %}
+		<div class="main">
+			<div class="about-text">
+				<h2 class="album-title">{{album.name}}</h2>
+				<h3 class="album-title"><a href="{{ album.author.get_absolute_url }}"><span>{{album.author.name}}</span></a></h3>
+				<div class="clear"></div>
+			</div>
+		</div>
+  	</div>
+	<div class="columns">
+		<div class="container">
+			{% if album.get_songs.count > 0 %}
+			<div class="columns__title title">Songs from this album:</div>
+			{% endif %}
+			<div class="columns__row">
+				{% for song in album.get_songs.all %}
+				<div class="columns__column">
+					<div class="columns__item item">
+						<div class="item__row">
+							
+							<div class="item__image">
+								{% if song.photo %}
+								<img class="flex__img" src="{{song.photo.url}}">
+								{% endif %}
+							</div>
+							<div class="item__body">
+								<div class="item__title"><a href="{{ song.get_absolute_url }}">{{song.title}}</a></div>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+

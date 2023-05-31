@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<!-- Header -->
+<head>
+  <title>{{title}}</title>
+  <link type="text/css" href="{% static 'songs/css/base.css' %}" rel="stylesheet" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="shortcut icon" href="{% static 'songs/images/logo.ico' %}" type="image/x-icon"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/
+  font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+</head>
+<!-- end Header -->
+
+
+<!-- Body -->
+<body>
+<!-- Mainmenu -->
+<div class="hero">
+	<nav>
+    	<a href="{% url 'home' %}" class="home_link"><h2 class="logo">Noti<span>fy</span></h2></a>
+    	<ul>
+      		<li><a href="{% url 'home' %}">Home</a></li>
+      		<li><a href="{% url 'authors' %}">Performers</a></li>
+      		<li><a href="{% url 'about' %}">About Us</a></li>
+      		<li><a href="{% url 'qr' %}">QR-code</a></li>
+    	</ul>
+    	<a href="{% url 'logout' %}"class="btn">Log Out</a>
+  	</nav>
+  	<div class="content-text">
+		{% if post.photo %}
+		<p class="lox"><img class="img-article-left thumb" src="{{post.photo.url}}"></p>
+		{% endif %}
+		<div class="main">
+			<div class="about-text">
+				<h2 class="album-title">{{post.title}}</h2>
+				<div class="p-content-text">
+                    <div class="about__author-post">
+						{% if post.is_single %}
+							<h3><span>Сингл</span></h3>
+					 	{% else %}
+                        <h3>Альбом : <a href="{{ post.album.get_absolute_url }}" class="post-album-href"><span>{{post.album.name}}</span></a></h3>
+						{% endif %}
+                    </div>
+                    <div class="about__author-post">
+                        <h3>Жанры : {% for genre in post.genre.all%}{{genre.name}} ; {% endfor %}</h3>
+                    </div>
+                    <div class="about__author-post">
+                        <h3>Исполнители : {% for author in post.author.all %}<a href="{{author.get_absolute_url}}"><span>{{author.name}}</span></a> ; {% endfor %}</h3>
+                    </div>
+					<div class="about__author-post">
+
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+  	</div>
+	<div class="text-about-song">
+		<div class="p-content-text txt">
+			{{ post.content|linebreaks }}
+		</div>
+	</div>
+</div>
+
+</body>
